@@ -1,0 +1,489 @@
+
+l_dialog = 720
+ui_dialog "Munich Chair" ,l_dialog,350
+
+diag_unit = l_dialog/12
+row = 3
+col = 3
+
+
+offset_row = 0
+x_pict_logo = diag_unit*3
+y_pict_logo = diag_unit
+h_but = diag_unit/2
+
+pos_x_menu = l_dialog/2-diag_unit*3+28
+pos_y_menu = h_but
+
+!ui_separator l_dialog/2,0,l_dialog/2,300
+
+ui_style 2,0
+
+gosub "main menu interface"
+
+col=pos_x_menu+12
+
+offset_but = diag_unit*3-25
+offset_pos_but = 0
+
+
+
+if current_page<3 then
+endif
+UI_BUTTON UI_FUNCTION, ">>", pos_x_menu+offset_but+32, pos_y_menu+1, h_but,h_but-2, next_menu_id_button
+if current_page>1 then
+UI_BUTTON UI_FUNCTION, "<<", pos_x_menu+offset_but, pos_y_menu+1, h_but,h_but-2, prev_menu_id_button
+else
+ui_pict 24,pos_x_menu+offset_but, pos_y_menu, h_but-1,h_but,0
+!ui_outfield "<<", (x_pict_logo-100)/2, row+25, 100, 20,4
+endif
+
+
+ui_pict 1,0,offset_row,x_pict_logo,y_pict_logo
+
+y_logo = y_pict_logo
+l_logo = x_pict_logo
+
+ui_pict 9,l_dialog-x_pict_logo,offset_row,l_logo,y_logo
+
+row = diag_unit+offset_row+18
+
+
+
+ui_separator 1,row-10,l_dialog+5,row-10
+
+ui_style 2,1
+x_object_pict = x_pict_logo-5
+y_object_pict = x_object_pict+diag_unit
+ui_pict 0,3,row+2,x_object_pict,y_object_pict
+ui_outfield bi_model_name+" "+str(current_page,3,0), (x_pict_logo-100)/2, row+25, 100, 20,2
+
+
+
+ui_separator 1,row,x_pict_logo,y_object_pict+row+5
+
+if main_menu="appearance" then
+!gosub "representation menu"
+endif
+
+if main_menu="appearance" then
+row0 = row
+
+x_pos_seppar = diag_unit*8
+
+!---separator 2d si 3d
+ui_separator x_pos_seppar,row,x_pos_seppar,270
+row0 = row
+gosub "2d repr menu"
+ row = row0
+gosub "3d repr menu"
+endif
+if main_menu="product_parameters" then
+gosub "Product parameters"
+endif
+if representation_menu="Label" & main_menu="appearance" then
+gosub "label menu"
+endif
+
+if main_menu="info" then
+gosub "Info"
+endif
+
+
+end
+
+!ui_dialog "Kullarberg chair - Ikea"
+!row = 0
+!col = 3
+!ui_style 2,0
+!ui_infield{3} "main_menu", 0, row+3, 140, 50,
+!	8, "",
+!	0, 0,
+!	65, 40, 30, 20,
+!	"",	"     Product Parameters",	"product_parameters",
+!	"",	"     Appearance",	"appearance",
+!	"",  "     Info","info"
+!col=142
+!if main_menu="appearance" then
+!gosub "representation menu"
+!endif
+!
+!col = 285
+!!ui_style 0,0
+!row = 0
+!ui_pict_button ui_link, "", 2, col, row, 47, 60, 1, "http://www.facebook.com" ui_tooltip `Visit our facebook page`
+!col=col+52
+!ui_pict_button ui_link, "", 3, col,row,47,60, 2, "http://www.facebook.com" ui_tooltip `send an email"
+!col=col+52
+!ui_pict_button ui_link, "", 4, col,row,47,60, 2, "http://www.facebook.com" ui_tooltip `visit our website"
+!col = 3
+!row = 65
+!l_separator = 440
+!
+!gosub "separator"
+!if representation_menu="2d" & main_menu="appearance" then
+!gosub "2d repr menu"
+!endif
+!if representation_menu="3d" & main_menu="appearance" then
+!gosub "3d repr menu"
+!endif
+!if representation_menu="Label" & main_menu="appearance" then
+!gosub "label menu"
+!endif
+!if main_menu="info" then
+!ui_pict 8,150,5,110,50
+!gosub "Info"
+!endif
+!col = 3
+!row = row+25
+!l_separator = 440
+!gosub "separator"
+!gosub "footer"
+!end
+!
+
+"Info":
+col = pos_x_menu
+aling1 = 160
+aling2 = 120
+row = row+10
+
+ui_style 2,2
+
+row_start = row
+if info_menu = "general info" then
+gosub "general info"
+endif
+
+return
+
+"general info":
+ui_style 2,1
+ui_outfield `Object version`, col, row, 100, 15
+ui_style 2,0
+ui_outfield obj_version, col+aling1, row, 100, 15
+row = row+h_but
+ui_style 2,1
+ui_outfield `Object type/group`, col, row, 100, 15
+ui_style 2,0
+ui_outfield bi_product_type, col+aling1, row, 100, 15
+row = row+h_but
+ui_style 2,1
+
+l_but = 150
+man_link = "http://www.classicon.com/en/product/"
+ui_button ui_link, "Manufacturer Link", col, row, l_but, h_but,0, man_link ui_tooltip man_link
+product_link = "http://www.classicon.com/en/product/munich-lounge-chair.html"
+ui_button ui_link, "Product Link", col, row+ h_but+15,l_but, h_but,0, product_link ui_tooltip product_link
+
+row = row+h_but*2+15+5
+ui_separator diag_unit*3+30,row,l_dialog,row
+ row = row+29
+ui_outfield "Want to get more?", col, row, 100, 15
+row = row+30
+ui_button ui_link, "Sign In", col, row,l_but, h_but,0, "http://www.google.com"
+
+row = row-10
+
+x_ico = 40
+offset_x_ico = 30
+col = col+180
+ui_pict_button ui_link, "", 2, col, row, x_ico, x_ico, 1, "http://www.google.com" ui_tooltip `Visit our page`
+
+col = col+x_ico+offset_x_ico
+
+ui_pict_button ui_link, "", 3, col, row, x_ico, x_ico, 1, "http://www.facebook.com" ui_tooltip `Visit our facebook page`
+
+col = col+x_ico+offset_x_ico
+
+ui_pict_button ui_link, "", 4, col, row, x_ico, x_ico, 1, "http://www.youtube.com" ui_tooltip `Visit our youtube channel`
+
+col = col+x_ico+offset_x_ico
+
+ui_pict_button ui_link, "", 5, col, row, x_ico, x_ico, 1, "http://www.twitter.com" ui_tooltip `Twitt us`
+
+col = col+x_ico+offset_x_ico
+
+ui_pict_button ui_link, "", 6, col, row, x_ico, x_ico, 1, "http://www.linkedin.com" ui_tooltip `Linkedin`
+
+return
+
+"description info":
+align1 = 30
+row = row+2
+gosub "separator"
+row = row+5
+row_start = row
+ui_style 2,0
+ui_outfield `Application:`, col, row, 100, 15
+ui_style 1,0
+row = row+20
+ui_outfield pr_appl_descr, col+align1, row, 400, 30
+ui_style 2,0
+row = row+35
+ui_style 2,0
+ui_outfield `Product description:`, col, row, 100, 15
+ui_style 1,0
+row = row+20
+ui_outfield product_descr, col+align1, row, 400, 60
+ui_style 2,0
+row = row+38
+return
+
+"separator":
+
+UI_SEPARATOR col,row,l_separator,row
+
+return
+
+"representation menu":
+
+ui_infield{3} "representation_menu", col-12, row+3, 110, 30,
+	2, 10,
+	2, 1,
+	30, 30, 25, 25,
+	2,	"2d settings",	"2d",
+	1,	"3d settings",	"3d",
+	0,	"Label",	"Label"
+
+return
+
+"2d repr menu":
+col = pos_x_menu+20
+ui_outfield `2D Representation`, col, row, 100, 15
+ui_style 2,0
+col0 = pos_x_menu+20
+col = col0
+row = row+h_but+5
+aling1 = -5
+aling2 = aling1+40
+hh_but = h_but-3
+l_input = 212
+gosub "2d gs_fill_type input"
+col =col0
+row = row+h_but+5
+l_input = h_but*1.4
+gosub  "2d pen input"
+col = col0
+row = row+h_but+6
+gosub "2d gs_fill_pen input"
+col = col0
+row = row+h_but+5
+l_input = 212
+gosub "2d gs_line_type input"
+return
+
+"2d gs_fill_type input":
+ui_pict fill_type_icon, col+aling1-7, row, 32,20
+col = col+aling2
+ui_infield "gs_fill_type", col, row-4,l_input, hh_but 
+return
+
+"2d pen input":
+ui_pict pen_countour_icon, col+aling1-7, row-2, 45, 25
+col = col+aling2
+
+ui_infield "gs_pen2d_number", col, row-4, l_input-4, hh_but +2
+ui_infield "gs_pen2d", col+l_input+2, row-3, l_input, hh_but 
+return
+
+"2d gs_line_type input":
+ui_pict gs_line_type_icon, col+aling1, row, 26, 22
+col = col+aling2
+ui_infield "gs_line_type", col, row-4,l_input, hh_but 
+return
+
+"2d gs_fill_pen input":
+ui_pict fill_pen_icon, col+aling1-7, row, 45, 25
+col = col+aling2
+ui_infield "gs_fill_pen_number", col, row-4, l_input-4, hh_but +2
+ui_infield "gs_fill_pen", col+l_input+2, row-3,l_input,hh_but 
+col = col0+l_input*2+3+40
+gosub "2d gs_fill_back input"
+return
+
+"2d gs_fill_back input":
+ui_pict fill_back_icon, col+aling1-5, row, 45, 25
+col = col+aling2
+ui_infield "gs_fill_back_number", col, row-4, l_input-4, hh_but +2
+ui_infield "gs_fill_back", col+l_input+2, row-3,l_input, hh_but 
+return
+
+"Product parameters":
+
+row_start = row
+gray_status = 0
+
+col = pos_x_menu
+aling1 = 115
+aling2 = aling1+40
+row = row+7
+gosub "3d materials"
+
+return
+
+"3d repr menu":
+col = col+240
+col0 = col
+ui_style 2,1
+ui_outfield `3D Representation`, col, row, 100, 15
+ui_style 2,0
+row_start = row
+gray_status = 0
+aling1 = 0
+aling2 = 110
+row = row+h_but+10
+gosub "3d volume"
+row = row+h_but
+col = col0
+aling2 = 40
+l_input = h_but*1.4
+gosub "3d gs_pen input"
+return
+
+"3d volume":
+
+col = col+aling1
+ui_outfield `3D`, col, row, 100, 15
+col = col+aling2
+ui_infield "volum_3d", col, row-4, 100, 19
+return
+
+"3d gs_pen input":
+ui_pict gs_pen3d_icon, col+aling1-8, row-2, 45, 25
+col = col+aling2
+ui_infield "gs_pen3d_number", col, row-4, l_input-4, hh_but +2
+ui_infield "gs_pen3d", col+l_input+2, row-3,l_input,hh_but 
+
+return
+
+"3d materials":
+!ui_pict 23, col, row, 34, 20
+col = col
+col1 = col+aling1
+ui_outfield "Materials", col, row, 100, 15
+ui_style 2,0
+col = col+aling2
+col2 = col
+l_input = 112
+row=row+25
+ui_outfield `Frame`, col1, row, 35, h_but-2,4*gray_status
+ui_infield "gs_mat_struct", col2, row-4, l_input, h_but
+
+row=row+h_but+1
+ui_outfield `Seat`, col1, row, 35, h_but-2,4*gray_status
+ui_infield "gs_mat_seat", col2, row-4, l_input, h_but
+return
+
+"label menu":
+col = 5
+row = row+20
+row_start = row
+aling1 = 40
+aling2 = 110
+gosub "show label input"
+col = 5
+row = row+20
+l_separator = 440
+gosub "separator"
+row = row+10
+gray_status = 0
+if text_ # 1 then
+gray_status = 1
+endif
+col = 5
+row = row
+gosub "label pen input"
+
+col = 5
+row = row+25
+
+gosub "label font_name"
+col = 5
+row = row+25
+
+gosub "label font size input"
+return
+
+"show label input":
+gray_status = 0
+if text_ # 1 then
+gray_status = 1
+endif
+ui_style 2,1
+col = col+aling1
+ui_outfield `Show Label`, col, row, 100, 15
+col = col+aling2
+ui_infield "text_", col, row-4, 19, 19
+row = row+20
+col = col-aling2
+ext_code = col
+ui_outfield `Show Code`, col, row, 80, 15,4*gray_status
+col = col+aling2
+ui_infield "code_tx", col, row-4, 19, 19
+col = col+22
+if (code_tx) then
+ui_style 2,0
+ui_outfield `|  Code Text :`, col, row, 70, 15,4*gray_status
+col = col+75
+ui_infield "label_text", col, row-4, 120, 19 UI_TOOLTIP "Label Code Text"
+endif
+col = ext_code
+row = row+25
+ui_style 2,1
+ui_outfield `Show Dimensions`, col, row, 100, 15,4*gray_status
+col = col+aling2
+ui_infield "dim_tx", col, row-4, 19, 19
+if (dim_tx) then
+col = col+22
+ui_style 2,2
+ui_outfield dim_tx_tot, col, row, 150, 15,4
+ui_style 2,0
+endif
+return
+
+"label pen input":
+
+col = col+aling1
+ui_outfield `Pen Contour`, col, row, 100, 15,4*gray_status
+col = col+aling2
+ui_infield "gs_text_pen", col, row-4, 100, 19
+return
+
+"label font_name":
+ui_pict 23, col, row, 34, 20
+col = col+aling1
+ui_outfield `Font Name`, col, row, 100, 15,4*gray_status
+col = col+aling2
+ui_infield "fs", col, row-4, 180, 19
+return
+
+"label font size input":
+
+col = col+aling1
+ui_outfield `Font Size`, col, row, 100, 15,4*gray_status
+col = col+aling2
+ui_infield "font_height", col, row-4, 100, 19
+return
+
+"footer":
+!
+col = col
+row=row+5
+ui_outfield "© 2016 xxxx", col, row, 400, 15,1*0+2*1+4*0
+return
+
+"main menu interface":
+h_el = h_but+2
+ui_infield{3} "main_menu", pos_x_menu, pos_y_menu-1.5, diag_unit*3-30,h_el,
+	2, "",
+	0, 0,
+	65, h_el, 30, h_el,
+	"",	"    Product Parameters",	"product_parameters",
+	"",	"     Appearance",	"appearance",
+	"",  "     Info","info"
+
+!ui_pict 26 , pos_x_menu, pos_y_menu-1.5+10,30,20
+
+return
+
