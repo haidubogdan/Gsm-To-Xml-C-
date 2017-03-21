@@ -1,0 +1,1 @@
+@start "" "%CD%\GsmReader\bin\Debug\GsmReader.exe"

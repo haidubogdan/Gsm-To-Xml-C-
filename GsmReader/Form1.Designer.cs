@@ -52,6 +52,7 @@
             this.convert_back = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.convert_name = new System.Windows.Forms.TextBox();
+            this.open_location = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.parameter_table)).BeginInit();
             this.SuspendLayout();
             // 
@@ -277,11 +278,22 @@
             this.convert_name.Size = new System.Drawing.Size(189, 20);
             this.convert_name.TabIndex = 22;
             // 
+            // open_location
+            // 
+            this.open_location.Location = new System.Drawing.Point(588, 91);
+            this.open_location.Name = "open_location";
+            this.open_location.Size = new System.Drawing.Size(103, 23);
+            this.open_location.TabIndex = 24;
+            this.open_location.Text = "Open Directory";
+            this.open_location.UseVisualStyleBackColor = true;
+            this.open_location.Click += new System.EventHandler(this.open_location_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(898, 604);
+            this.Controls.Add(this.open_location);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.convert_name);
             this.Controls.Add(this.convert_back);
@@ -332,6 +344,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn parameter_value;
         private System.Windows.Forms.DataGridViewButtonColumn delete_parameter;
         private System.Windows.Forms.DataGridViewButtonColumn add_parameter;
+        private System.Windows.Forms.Button open_location;
     }
 }
 

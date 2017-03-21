@@ -140,7 +140,7 @@ namespace GsmReader
                     {
                         row.Cells["parameter_type"].Value = parameter.Name;
                        
-                        console_output.Text += "\r\n Name " + parameter.Name +"  "+ parameter_type.Items.IndexOf(parameter.Name);
+                        //console_output.Text += "\r\n Name " + parameter.Name +"  "+ parameter_type.Items.IndexOf(parameter.Name);
                     }
                     catch
                     {
@@ -222,7 +222,7 @@ namespace GsmReader
                 {
                     var rowIndex = r.Index;
                     moveRowDown(rowIndex);
-                    console_output.Text += "\r\n Name" + rowIndex + " Total :" + nrTotal;
+                    //console_output.Text += "\r\n Name" + rowIndex + " Total :" + nrTotal;
                 }
 
 
@@ -476,6 +476,18 @@ namespace GsmReader
         private void convert_back_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void open_location_Click(object sender, EventArgs e)
+        {
+           string path = Path.GetDirectoryName(destination_location);
+            ProcessStartInfo StartInformation = new ProcessStartInfo();
+
+            StartInformation.FileName = path;
+
+            Process process = Process.Start(StartInformation);
+
+            //process.EnableRaisingEvents = true;
         }
     }
 
