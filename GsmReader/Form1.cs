@@ -62,11 +62,14 @@ namespace GsmReader
             if (destination_location != null)
             {
                 convertToXml();
-                if (!File.Exists(destination_location))
+                if (File.Exists(destination_location))
                 {
-                    //convertToXml();
+                    openXmlFile(destination_location);
+                }else
+                {
+                    MessageBox.Show("Xml conversion failed");
                 }
-                openXmlFile(destination_location);
+               
                 
             }
             else
@@ -85,13 +88,22 @@ namespace GsmReader
             string command_line = programPath + operation + sourceLocation + " " + destinationLocation;
             executeLpShellCommand(command_line);
         }
-        private void convertToGsm()
+        public void convertToGsm(string name="")
         {
+            string gsmFileName = "";
+            if (name == "")
+            {
+                gsmFileName = selected_file.Text;
+            }else
+            {
+                gsmFileName = Path.GetDirectoryName(selected_file.Text) + "\\" + name+".gsm";
+            }
             string programPath = "\"\"" + lp_location.Text + "\" ";
-            string sourceLocation = "\"" + selected_file.Text + "\"";
-            string destinationLocation = "\"" + destination_location + "\"\"";
+            string sourceLocation = "\"" + destination_location + "\"";
+            string destinationLocation = "\"" + gsmFileName + "\"\"";
             string operation = " xml2libpart ";
             string command_line = programPath + operation + sourceLocation + " " + destinationLocation;
+            MessageBox.Show(command_line);
             executeLpShellCommand(command_line);
         }
         private void parameter_table_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -463,19 +475,12 @@ namespace GsmReader
             }
         }
 
-        private void gdl_combiner_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            Form2 settingsForm = new Form2();
-
-            // Show the settings form
-            settingsForm.ShowDialog();
-            this.Close();
-        }
-
         private void convert_back_Click(object sender, EventArgs e)
         {
+            versionForm versionForm = new versionForm(this);
 
+            // Show the version form
+            versionForm.ShowDialog();
         }
 
         private void open_location_Click(object sender, EventArgs e)

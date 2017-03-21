@@ -15,6 +15,6 @@ C:\Users\Bogdan\Documents\Visual Studio 2015\Projects\GsmXmlConverter\GsmReader\
 C:\Users\Bogdan\Documents\Visual Studio 2015\Projects\GsmXmlConverter\GsmReader\bin\Debug\GsmReader.pdb
 C:\Users\Bogdan\Documents\Visual Studio 2015\Projects\GsmXmlConverter\GsmReader\obj\Debug\GsmReader.csprojResolveAssemblyReference.cache
 C:\Users\Bogdan\Documents\Visual Studio 2015\Projects\GsmXmlConverter\GsmReader\obj\Debug\GsmReader.Form1.resources
-C:\Users\Bogdan\Documents\Visual Studio 2015\Projects\GsmXmlConverter\GsmReader\obj\Debug\GsmReader.Form2.resources
 C:\Users\Bogdan\Documents\Visual Studio 2015\Projects\GsmXmlConverter\GsmReader\obj\Debug\GsmReader.Properties.Resources.resources
 C:\Users\Bogdan\Documents\Visual Studio 2015\Projects\GsmXmlConverter\GsmReader\obj\Debug\GsmReader.csproj.GenerateResource.Cache
+C:\Users\Bogdan\Documents\Visual Studio 2015\Projects\GsmXmlConverter\GsmReader\obj\Debug\GsmReader.versionForm.resources
